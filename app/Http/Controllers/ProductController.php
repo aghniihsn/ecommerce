@@ -150,10 +150,10 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         file::delete('uploads/' . $product->image);
-
         $product->delete();
 
         return response()->json([
+            'success' => true,
             'message' => 'success'
         ]);
     }

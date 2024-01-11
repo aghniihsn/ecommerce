@@ -34,6 +34,9 @@
                     Diskon
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    SKU
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Warna
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -145,7 +148,7 @@
                         <th><img src="/uploads/${val.image}" width="150"></th>
                         <th class="px-6 py-4">${val.price}</th>
                         <th class="px-6 py-4">${val.discount}</th>
-                        <th class="px-6 py-4">${val.tags}</th>
+                        <th class="px-6 py-4">${val.sku}</th>
                         <th class="px-6 py-4">${val.color}</th>
                         <th class="px-6 py-4">${val.stock}</th>
                         <th>
@@ -180,9 +183,6 @@
 
             const confirm_dialog = confirm('Apakah anda yakin?');
 
-            console.log(token)
-            return
-
             if (confirm_dialog) {
                 $.ajax({
                     url: '/api/products/' + id,
@@ -191,8 +191,8 @@
                         "Authorization": token
                     },
 
-                    succes: function(data) {
-                        if (data.message == 'succes') {
+                    success: function(data) {
+                        if (data.message == 'success') {
                             alert('data berhasil dihapus')
                             location.reload()
                         }

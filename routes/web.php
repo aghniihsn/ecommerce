@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -17,12 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// VIEWS MEMBER
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/login_member', function () {
-    return view('login_member');
+// VIEWS
+Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/login', function () {
+    return view('login');
 });
 Route::get('/register', function () {
     return view('register');
@@ -33,33 +34,46 @@ Route::get('/faq', function () {
 Route::get('/cart', function () {
     return view('cart');
 });
-Route::get('/product-list', function () {
-    return view('product-list');
+Route::get('/products', function () {
+    return view('products');
 });
-Route::get('/description', function () {
-    return view('description');
+Route::get('/product/{id}', [ProductController::class, 'detail']);
+
+// Route::get('/product/{id}', function () {
+//     return view('product-detail');
+// });
+Route::get('/tentang-kami', function () {
+    return view('tentang-kami');
 });
+Route::get('/payment', function () {
+    return view('payment');
+});
+
+Route::get('/order', function () {
+    return view('order');
+});
+
+
 
 // VIEWS ADMIN
-Route::get('/login', function () {
-    return view('auth.login');
+Route::get('/login-admin', function () {
+    return view('admin.login');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/dashboard-admin', function () {
+    return view('admin.dashboard');
 });
-Route::get('/kategori', function () {
-    return view('kategori.index');
+Route::get('/category-admin', function () {
+    return view('admin.category');
+});
+Route::get('/product-admin', function () {
+    return view('admin.product');
+});
+Route::get('/payment-admin', function () {
+    return view('payment.index');
+});
+Route::get('/banner-admin', function () {
+    return view('admin.banner');
 });
 
-
-// ENDPOINT LIST
-//Auth
-Route::post('login-member', [AuthController::class, 'login_member']);
-Route::post('logout-member', [AuthController::class, 'logout_member']);
-Route::post('login', [AuthController::class, 'login']);
 Route::get('logout', [AuthController::class, 'logout']);
-
-//kategori
-Route::get('/kategori', [CategoryController::class, 'list']);
-
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('logout-admin', [AuthController::class, 'logout_admin']);

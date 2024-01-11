@@ -10,6 +10,7 @@ use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\BannerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,11 +27,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'middleware' => 'api',
-    'prefix' => 'auth'
 ], function(){
-    Route::post('admin', [AuthController::class, 'login'])-> name('login');
+    Route::post('login-admin', [AuthController::class, 'login'])-> name('login');
     Route::post('register', [AuthController::class, 'register'])-> name('register');
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('logout-admin', [AuthController::class, 'logout']);
 });
 
 Route::group([
@@ -38,13 +39,12 @@ Route::group([
 ], function(){
     Route::resources([
        'categories' => CategoryController::class,
-       'subcategories' => SubcategoryController::class,
        'sliders' => SliderController::class,
-       'produtcs' => ProductController::class,
-       'members' => MemberController::class,
-       'testimonis' => TestimoniController::class,
+       'products' => ProductController::class,
        'reviews' => ReviewController::class,
-       'orders' => OrderController::class
+       'orders' => OrderController::class,
+       'banner' => BannerController::class,
+
     ]);
 
     Route::get('order/dikonfirmasi', [OrderController::class, 'dikonfirmasi']);
@@ -55,5 +55,8 @@ Route::group([
     Route::post('order/ubah_status/{order}', [OrderController::class, 'ubah_status']);
 
     Route::get('reports', [ReportController::class, 'index']);
+
+    Route::post('login', [AuthController::class, 'login']);
 });
+
 

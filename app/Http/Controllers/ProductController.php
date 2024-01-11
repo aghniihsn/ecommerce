@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this ->middleware('auth:api', ['except' => 'index']);
+        // $this ->middleware('auth:api', ['except' => 'index']);
     }
     /**
      * Display a listing of the resource.
@@ -46,16 +46,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = validator::make($request->all(), [
-            'id_kategori' => 'required',
-            'id_subkategori' => 'required',
-            'nama_barang' => 'required',
-            'gambar' => 'required|image|mines:jpg,png,jpeg,webp',
-            'deskripsi' => 'required',
-            'harga' => 'required',
-            'diskon' => 'required',
-            'tags' => 'required',
+            'name' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg,webp',
+            'description' => 'required',
+            'price' => 'required',
+            'discount' => 'required',
             'sku' => 'required',
-            'warna' => 'required'
+            'color' => 'required',
+            'stock' => 'required',
         ]);
 
         if ($validator->fails()){
@@ -67,16 +65,17 @@ class ProductController extends Controller
 
         $input = $request->all();
 
-        if ($request->has('gambar')) {
-            $gambar = $request->file('gambar');
-            $nama_gambar = time() . rand(1, 9) .'.'. $gambar->getClientOriginalExtension();
-            $gambar->move('uploads', $nama_gambar);
-            $input['gambar'] = $nama_gambar;
+        if ($request->has('image')) {
+            $image = $request->file('image');
+            $image_name = time() . rand(1, 9) .'.'. $image->getClientOriginalExtension();
+            $image->move('uploads', $image_name);
+            $input['image'] = $image_name;
         }
 
         $product = Product::create($input);
 
         return response()->json([
+            'success' => true,
             'data' => $product
         ]);
     }
@@ -95,17 +94,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -115,16 +103,14 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validator = validator::make($request->all(), [
-            'id_kategori' => 'required',
-            'id_subkategori' => 'required',
-            'nama_barang' => 'required',
-            'gambar' => 'required|image|mines:jpg,png,jpeg,webp',
-            'deskripsi' => 'required',
-            'harga' => 'required',
-            'diskon' => 'required',
-            'tags' => 'required',
+            'name' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg,webp',
+            'description' => 'required',
+            'price' => 'required',
+            'discount' => 'required',
             'sku' => 'required',
-            'warna' => 'required'
+            'color' => 'required',
+            'stock' => 'required',
         ]);
 
         if ($validator->fails()){
@@ -136,21 +122,21 @@ class ProductController extends Controller
 
         $input = $request->all();
 
-        if ($request->has('gambar')) {
-            file::delete('uploads/' . $product->gambar);
-            $gambar = $request->file('gambar');
-            $nama_gambar = time() . rand(1, 9) .'.'. $gambar->getClientOriginalExtension();
-            $gambar->move('uploads', $nama_gambar);
-            $input['gambar'] = $nama_gambar;
+        if ($request->has('image')) {
+            file::delete('uploads/' . $product->image);
+            $image = $request->file('image');
+            $image_name = time() . rand(1, 9) .'.'. $image->getClientOriginalExtension();
+            $image->move('uploads', $image_name);
+            $input['image'] = $image_name;
         } else {
-            unset($input['gambar']);
+            unset($input['image']);
         }
 
-        
+
         $product->update($input);
 
         return response()->json([
-            'message' => 'succes',
+            'message' => 'success',
             'data' => $product
         ]);
     }
@@ -163,12 +149,24 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        file::delete('uploads/' . $product->gambar);
-        
+        file::delete('uploads/' . $product->image);
+
         $product->delete();
 
         return response()->json([
-            'message' => 'succes'
+            'message' => 'success'
         ]);
+    }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function detail(string $productId)
+    {
+        $product = Product::where('id', $productId)->get()[0];
+
+        return view('product-detail', compact(('product')));
     }
 }

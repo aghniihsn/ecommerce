@@ -21,9 +21,18 @@
 </section>
 
 <section id="logo" class="py-16">
-    <div class="w-[70%] md:w-1/2 relative">
-        <img class="w-50 pl-48 relative z-10" src="img/logo.png" alt="">
+    <div class="container mx-auto py-2 justify-items-center items-center flex md:flex-row gap-2 flex-col">
+        <div class="w-[70%] md:w-1/2 relative">
+            <img class="w-50 pl-48 relative z-10" src="img/logo.png" alt="">
         </div>
+        <div class="w-full md:w-1/2 flex flex-col px-16 justify-center text-center">
+            <h2 class="text-3xl font-bold mb-5">
+                Our Logo
+            </h2>
+            <p>ROG adalah sebuah bukti nyata untuk mengejar keunggulan dan mendorong batas dari diri.Setiap bekas luka adalah sebuah lencana kebanggaan - sebagai harga dari kemenangan.</p>
+        </div>
+    </div>
+        
 </section>
 
 @endsection

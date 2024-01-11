@@ -9,7 +9,7 @@
             <div class="flex items-center space-x-6 rtl:space-x-reverse">
                 @auth
                 <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" class="ms-5 flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                    <!-- <button type="button" class="ms-5 flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                         <span class="sr-only">Open user menu</span>
                         <svg class="w-7 h-7 rounded-full" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3900 3900">
                             <path fill="#b22234" d="M0 0h7410v3900H0z" />
@@ -36,7 +36,7 @@
                                 <use xlink:href="#e" x="2470" />
                             </g>
                         </svg>
-                    </button>
+                    </button> -->
                     <!-- Dropdown menu -->
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
                         <div class="px-4 py-3">
@@ -90,7 +90,7 @@
                 </li>
 
                 <li>
-                    <a href="<?php echo url('support') ?>" class="text-gray-900 dark:text-white hover:underline">Support</a>
+                    <a href="https://wa.me/081564602171" target="_blank" class="text-gray-900 dark:text-white hover:underline">Support</a>
                 </li>
             </ul>
         </div>

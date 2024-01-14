@@ -58,6 +58,7 @@ class AuthController extends Controller
 
         $input = $request->all();
         $input['password'] = bcrypt($request->password);
+        $input['role'] = 'user';
         // unset($input['konfirmasi_password']);
         $member = User::create($input);
         return response()->json([
